@@ -1,4 +1,4 @@
-package Exceptions;
+package Scs.Exceptions;
 
 import java.util.UUID;
 

@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import Exceptions.UnauthorizedException;
+import Scs.Exceptions.UnauthorizedException;
 import Scs.entities.user.User;
 import io.jsonwebtoken.Jwts; //libreria per generare token
 import io.jsonwebtoken.security.Keys;

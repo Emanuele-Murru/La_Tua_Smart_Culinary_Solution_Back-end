@@ -1,4 +1,4 @@
-package Exceptions;
+package Scs.Exceptions;
 
 public class UnauthorizedException extends RuntimeException{
 	

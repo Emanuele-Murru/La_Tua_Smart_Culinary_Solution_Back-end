@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import Exceptions.UnauthorizedException;
+import Scs.Exceptions.UnauthorizedException;
 import Scs.entities.user.User;
 import Scs.entities.user.UserService;
 import jakarta.servlet.FilterChain;

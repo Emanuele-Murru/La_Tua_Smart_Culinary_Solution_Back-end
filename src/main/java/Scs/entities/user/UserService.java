@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import Exceptions.BadRequestException;
-import Exceptions.NotFoundException;
+import Scs.Exceptions.BadRequestException;
+import Scs.Exceptions.NotFoundException;
 import Scs.entities.user.payloads.UserRequestPayload;
 
 
