@@ -32,7 +32,7 @@ public class SecurityConfig {
 		http.addFilterBefore(corsFilter, JWTAuthFilter.class);
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/user/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/recipes/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/recipe/**").permitAll());
 		return http.build();
 	}
 

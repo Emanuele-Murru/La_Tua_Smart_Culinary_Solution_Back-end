@@ -1,19 +1,19 @@
-package Scs.entities;
+package Scs.entities.ingredients;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Scs.entities.recipe.Recipe;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
 @Data
-public class Ingredients {
+public class Ingredient {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,6 @@ public class Ingredients {
 	private String name;
 	private String quantity;
 	
-	@ManyToOne
-	@JoinColumn(name = "recipe_id")
-	private List <Recipes> recipes;
+	@OneToMany
+	private List <Recipe> recipes = new ArrayList<>();
 }

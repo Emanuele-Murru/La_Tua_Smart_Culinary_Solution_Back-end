@@ -1,5 +1,6 @@
 package Scs.entities.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -10,12 +11,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import Scs.entities.Recipes;
+import Scs.entities.recipe.Recipe;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,7 +44,8 @@ public class User implements UserDetails{
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	private List<Recipes> recipesLiked;
+	@OneToMany(mappedBy = "user")
+	private List<Recipe> recipes = new ArrayList<>();
 	
 	public User(String _name, String _surname, String _username, String _email, String _password, Role _role) {
 		

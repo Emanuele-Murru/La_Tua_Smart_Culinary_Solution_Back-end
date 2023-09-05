@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import Scs.Exceptions.UnauthorizedException;
 import Scs.entities.user.User;
-import io.jsonwebtoken.Jwts; //libreria per generare token
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 @Component
 public class JWTTools {
