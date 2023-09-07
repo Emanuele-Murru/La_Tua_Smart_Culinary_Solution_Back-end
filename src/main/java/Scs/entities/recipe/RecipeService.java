@@ -24,7 +24,7 @@ public class RecipeService {
 		newRecipe.setInstructions(body.getInstructions());
 		newRecipe.setPrepTime(body.getPrepTime());
 		newRecipe.setCookTime(body.getCookTime());
-		newRecipe.setQuantity(body.getQuantity());
+		newRecipe.setServings(body.getServings());
 		newRecipe.setIngredients(body.getIngredients());
 		
 		recipeRepo.save(newRecipe);

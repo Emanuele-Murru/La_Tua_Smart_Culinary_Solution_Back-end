@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import Scs.entities.user.User;
 
 @Repository
-public interface RecipeRepository extends JpaRepository<Recipe, UUID>{
+public interface RecipeRepository extends JpaRepository<Recipe, Long>{
 
 }

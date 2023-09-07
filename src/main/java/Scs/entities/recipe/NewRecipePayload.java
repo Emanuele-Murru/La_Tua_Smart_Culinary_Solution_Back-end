@@ -17,7 +17,7 @@ public class NewRecipePayload {
 	private String instructions;
 	private String prepTime;
 	private String cookTime;
-	private String quantity;
+	private int servings;
 	private List<Ingredient> ingredients;
 	
 }

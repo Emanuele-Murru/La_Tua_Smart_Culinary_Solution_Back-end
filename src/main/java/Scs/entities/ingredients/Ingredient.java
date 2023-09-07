@@ -9,8 +9,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Data
 public class Ingredient {
@@ -24,4 +28,9 @@ public class Ingredient {
 	
 	@OneToMany
 	private List <Recipe> recipes = new ArrayList<>();
+	
+	public Ingredient(String _name, String _quantity) {
+		this.name = _name;
+		this.quantity = _quantity;
+	}
 }

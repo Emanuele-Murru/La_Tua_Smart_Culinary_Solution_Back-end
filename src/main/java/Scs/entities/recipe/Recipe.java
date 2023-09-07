@@ -31,7 +31,7 @@ public class Recipe {
 	private String instructions;
 	private String prepTime;
 	private String cookTime;
-	private String quantity;
+	private int servings;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")

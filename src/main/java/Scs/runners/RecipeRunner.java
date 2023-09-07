@@ -12,49 +12,57 @@ import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
 
 import Scs.entities.ingredients.Ingredient;
-import Scs.entities.recipe.NewRecipePayload;
+import Scs.entities.ingredients.IngredientPayload;
+import Scs.entities.ingredients.IngredientRepository;
+import Scs.entities.ingredients.IngredientService;
 import Scs.entities.recipe.Recipe;
 import Scs.entities.recipe.RecipeRepository;
-import Scs.entities.recipe.RecipeService;
 
 @Order(value = 0)
 @Component
-public class RecipeRunner implements CommandLineRunner{
+public class RecipeRunner implements CommandLineRunner {
 
 	@Autowired
 	RecipeRepository recipeRepo;
-	
+
 	@Autowired
-	RecipeService recipeSrv;
-	
+	IngredientService ingredientSrv;
+
+	@Autowired
+	IngredientRepository ingredientRepo;
+
 	@Override
 	public void run(String... args) throws Exception {
+
 		Faker faker = new Faker(new Locale("it"));
+
+		List<Ingredient> ingredientDb = ingredientRepo.findAll();
+		List<Recipe> recipeDb = recipeRepo.findAll();
 		
-		List<Recipe> recipesDb = recipeRepo.findAll();
-		
-		List<Ingredient> ingredients = new ArrayList<>();
-		
-		if(recipesDb.isEmpty()) {
-			
+		if (ingredientDb.isEmpty() || recipeDb.isEmpty() ) {
+
 			for (int i = 0; i < 10; i++) {
-				String title = faker.food().dish();
-				String category = faker.food().vegetable();
-				String instructions = faker.lorem().paragraph();
-				String prepTime = faker.number().toString();
-				String cookTime = faker.number().toString();
-				String quantity = faker.food().measurement();
-				
-				Ingredient ingredient = new Ingredient();
-				ingredient.setName(faker.food().ingredient());
-				ingredient.setQuantity(faker.number().randomDigitNotZero() + "" + faker.food().measurement());
-				
-				ingredients.add(ingredient);
-				
-				NewRecipePayload newRecipe = new NewRecipePayload(title, category, instructions, prepTime, cookTime, quantity, ingredients);
-				recipeSrv.createRecipe(newRecipe);
+				Recipe recipe = new Recipe();
+				recipe.setTitle(faker.food().dish());
+				recipe.setCategory(faker.food().ingredient());
+				recipe.setInstructions(faker.lorem().paragraph());
+				recipe.setPrepTime("About " + faker.number() + " minutes");
+				recipe.setCookTime("About " + faker.number() + " minutes");
+				recipe.setServings(faker.number().numberBetween(1, 5));
+
+				List<Ingredient> ingredients = new ArrayList<>();
+				for (int j = 0; j < 8; j++) {
+					Ingredient ingredient = new Ingredient();
+					ingredient.setName(faker.food().ingredient());
+					ingredient.setQuantity(faker.food().measurement());
+					ingredients.add(ingredient);
+					ingredientRepo.save(ingredient); // Salva ciascun ingrediente nel database
+				}
+
+				recipe.setIngredients(ingredients);
+				recipeRepo.save(recipe); // Salva la ricetta nel database
 			}
 		}
+
 	}
-	
 }
