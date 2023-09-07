@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +22,6 @@ public class UserService {
 	@Autowired
 	UserRepository userRepo;
 
-	// SALVA NUOVO UTENTE + ECCEZIONE SE VIENE USATA LA STESSA EMAIL
 	public User save(UserRequestPayload body) {
 		
 		userRepo.findByEmail(body.getEmail()).ifPresent(user -> {
@@ -30,17 +33,19 @@ public class UserService {
 		return userRepo.save(newUtente);
 	}
 
-	// TORNA LA LISTA DEGLI UTENTI
 	public List<User> getUsers() {
 		return userRepo.findAll();
 	}
+	
+	public Page<User> findAll(int page, String sort) {
+		Pageable pageable = PageRequest.of(page, 10, Sort.by(sort));
+		return userRepo.findAll(pageable);
+	}
 
-	// CERCA UTENTE TRAMITE ID
 	public User findById(UUID id) throws NotFoundException {
 		return userRepo.findById(id).orElseThrow(() -> new NotFoundException(id));
 	}
 
-	// CERCA E MODIFICA UTENTE TRAMITE ID
 	public User findByIdAndUpdate(UUID id, UserRequestPayload body) throws NotFoundException {
 		User found = this.findById(id);
 		found.setName(body.getName());
@@ -49,7 +54,6 @@ public class UserService {
 		return userRepo.save(found);
 	}
 
-	// CERCA E CANCELLA UTENTE TRAMITE ID
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
 		User found = this.findById(id);
 		userRepo.delete(found);
@@ -57,6 +61,6 @@ public class UserService {
 
 	public User findByEmail(String email) {
 		return userRepo.findByEmail(email)
-				.orElseThrow(() -> new NotFoundException("Utente con email " + email + " non trovato"));
+				.orElseThrow(() -> new NotFoundException("We can not find any user with the email: " + email));
 	}
 }

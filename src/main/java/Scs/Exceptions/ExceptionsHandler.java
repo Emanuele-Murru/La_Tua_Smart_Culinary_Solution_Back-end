@@ -36,7 +36,7 @@ public class ExceptionsHandler {
 	public ErrorsPayload handleGeneric(Exception e) {
 		log.error(e.getMessage());
 		e.printStackTrace();
-		return new ErrorsPayload("Errore generico, risolveremo il prima possibile", new Date(), 2321);
+		return new ErrorsPayload("General error, we're working on it right now!", new Date(), 2321);
 	}
 	
 }

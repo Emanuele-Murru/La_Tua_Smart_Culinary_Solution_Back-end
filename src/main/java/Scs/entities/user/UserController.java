@@ -20,7 +20,7 @@ import Scs.entities.user.payloads.UserRequestPayload;
 
 
 @RestController
-@RequestMapping("/utenti")
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired

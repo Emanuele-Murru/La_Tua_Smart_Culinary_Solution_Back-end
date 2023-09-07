@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import Scs.Exceptions.NotFoundException;
+
 @Service
 public class RecipeService {
 	
@@ -39,6 +41,27 @@ public class RecipeService {
 	public Page<Recipe> findAll(int page, String sort) {
 		Pageable pageable = PageRequest.of(page, 10, Sort.by(sort));
 		return recipeRepo.findAll(pageable);
+	}
+	
+	public Recipe findById(Long id) throws NotFoundException {
+		return recipeRepo.findById(id).orElseThrow(() -> new NotFoundException(id));
+	}
+	
+	public Recipe findByIdAndUpdate(Long id, NewRecipePayload body) throws NotFoundException {
+		Recipe recipeFound = this.findById(id);
+		recipeFound.setTitle(body.getTitle());
+		recipeFound.setCategory(body.getCategory());
+		recipeFound.setInstructions(body.getInstructions());
+		recipeFound.setPrepTime(body.getPrepTime());
+		recipeFound.setCookTime(body.getCookTime());
+		recipeFound.setServings(body.getServings());
+		recipeFound.setIngredients(body.getIngredients());
+		return recipeRepo.save(recipeFound);
+	}
+	
+	public void findByIdAndDelete(Long id) throws NotFoundException {
+		Recipe recipeFound = this.findById(id);
+		recipeRepo.delete(recipeFound);
 	}
 	
 }
