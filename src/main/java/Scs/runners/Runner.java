@@ -1,7 +1,6 @@
 package Scs.runners;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
 
 import Scs.entities.ingredients.Ingredient;
-import Scs.entities.ingredients.IngredientPayload;
 import Scs.entities.ingredients.IngredientRepository;
 import Scs.entities.ingredients.IngredientService;
 import Scs.entities.recipe.Recipe;
