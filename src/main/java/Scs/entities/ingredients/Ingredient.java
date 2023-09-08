@@ -3,8 +3,6 @@ package Scs.entities.ingredients;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import Scs.entities.recipe.Recipe;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
