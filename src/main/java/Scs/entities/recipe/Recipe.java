@@ -43,8 +43,7 @@ public class Recipe {
 	@JsonIgnore
 	private User user;
 	
-	@JsonManagedReference
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "recipe_ingredients", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
 	private List<Ingredient> ingredients = new ArrayList<>();
 }

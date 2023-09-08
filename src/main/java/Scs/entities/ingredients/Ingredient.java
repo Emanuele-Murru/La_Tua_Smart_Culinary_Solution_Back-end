@@ -28,7 +28,6 @@ public class Ingredient {
 	private String name;
 	private String quantity;
 	
-	@JsonBackReference
 	@ManyToMany(mappedBy = "ingredients")
 	private List <Recipe> recipes = new ArrayList<>();
 	

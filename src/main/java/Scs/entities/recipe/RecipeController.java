@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import Scs.Exceptions.BadRequestException;
 import Scs.Exceptions.NotFoundException;
 
 @RestController
@@ -23,9 +24,9 @@ public class RecipeController {
 	@Autowired
 	private RecipeService recipeSrv;
 	
-	@PostMapping
+	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Recipe saveIngredient(@RequestBody NewRecipePayload body) throws Exception {
+	public Recipe saveRecipe(@RequestBody NewRecipePayload body) throws BadRequestException {
 		Recipe recipeCreated = recipeSrv.createRecipe(body);
 		return recipeCreated;
 	}
