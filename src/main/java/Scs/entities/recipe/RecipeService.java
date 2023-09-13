@@ -83,5 +83,10 @@ public class RecipeService {
 		Recipe recipeFound = this.findById(id);
 		recipeRepo.delete(recipeFound);
 	}
+	
+	public List<Recipe> searchRecipesByIngredients(List<String> ingredientNames) {
+	    return recipeRepo.findByIngredientsNameIn(ingredientNames);
+	}
+
 
 }
