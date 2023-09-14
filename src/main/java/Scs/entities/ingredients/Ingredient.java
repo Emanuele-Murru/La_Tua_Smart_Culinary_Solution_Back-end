@@ -3,7 +3,7 @@ package Scs.entities.ingredients;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import Scs.entities.recipe.Recipe;
 import jakarta.persistence.Entity;
@@ -21,13 +21,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class Ingredient {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private long id;
 	
+	@Id
 	private String name;
 	private String quantity;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "ingredients")
 	private List <Recipe> recipes = new ArrayList<>();
 	
