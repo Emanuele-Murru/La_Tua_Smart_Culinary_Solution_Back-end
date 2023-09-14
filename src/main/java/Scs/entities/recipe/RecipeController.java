@@ -47,7 +47,7 @@ public class RecipeController {
 	}
 
 	@PutMapping("/{id}")
-	public Recipe updateCliente(@PathVariable Long id, @RequestBody NewRecipePayload body) throws NotFoundException {
+	public Recipe updateRecipe(@PathVariable Long id, @RequestBody NewRecipePayload body) throws NotFoundException {
 		return recipeSrv.findByIdAndUpdate(id, body);
 	}
 	
