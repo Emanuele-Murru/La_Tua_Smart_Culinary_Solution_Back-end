@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import Scs.entities.user.payloads.UserRequestPayload;
 
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
