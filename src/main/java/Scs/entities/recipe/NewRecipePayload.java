@@ -13,11 +13,12 @@ import lombok.Setter;
 public class NewRecipePayload {
 	
 	private String title;
-	private String category;
+	private RecipeCategory category;
 	private String instructions;
 	private String prepTime;
 	private String cookTime;
 	private int servings;
+	private String imageUrl;
 	private List<Ingredient> ingredients;
 	
 }

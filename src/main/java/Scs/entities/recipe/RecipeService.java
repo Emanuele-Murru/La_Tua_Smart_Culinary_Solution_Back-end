@@ -45,6 +45,7 @@ public class RecipeService {
 		newRecipe.setPrepTime(body.getPrepTime());
 		newRecipe.setCookTime(body.getCookTime());
 		newRecipe.setServings(body.getServings());
+		newRecipe.setImageUrl(body.getImageUrl());
 
 		newRecipe.setIngredients(ingredients);
 
@@ -75,6 +76,7 @@ public class RecipeService {
 		recipeFound.setPrepTime(body.getPrepTime());
 		recipeFound.setCookTime(body.getCookTime());
 		recipeFound.setServings(body.getServings());
+		recipeFound.setImageUrl(body.getImageUrl());
 		recipeFound.setIngredients(body.getIngredients());
 		return recipeRepo.save(recipeFound);
 	}
