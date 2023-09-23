@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import Scs.entities.ingredients.Ingredient;
 import Scs.entities.user.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,6 +32,7 @@ public class Recipe {
 	private long id;
 	
 	private String title;
+	@Enumerated(EnumType.STRING)
 	private RecipeCategory category;
 	private String instructions;
 	private String prepTime;
