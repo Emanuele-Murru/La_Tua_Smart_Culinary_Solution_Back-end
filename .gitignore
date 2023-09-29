@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 La_Tua_Smart_Culinary_Solution_Front-end/
+env.properties
