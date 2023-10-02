@@ -66,7 +66,7 @@ public class RecipeService {
 	}
 
 	public Page<Recipe> getRecipesByCategory(RecipeCategory category, int page, String order) {
-	    Pageable pageable = PageRequest.of(page, 10, Sort.by(order));
+	    Pageable pageable = PageRequest.of(page, 12, Sort.by(order));
 
 	    if (category != null) {
 	        return recipeRepo.findByCategory(category, pageable);
