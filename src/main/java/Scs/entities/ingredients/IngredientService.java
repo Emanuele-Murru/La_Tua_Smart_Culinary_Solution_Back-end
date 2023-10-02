@@ -20,7 +20,7 @@ public class IngredientService {
 	
 	public Ingredient createIngredient(IngredientPayload body) {
 		
-		Ingredient newIngredient = new Ingredient(body.getName(), body.getQuantity());
+		Ingredient newIngredient = new Ingredient(body.getName(), body.getQuantity(), body.getImgUrl());
 		
 		return ingredientRepo.save(newIngredient);
 	}

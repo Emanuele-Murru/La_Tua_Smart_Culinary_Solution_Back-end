@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import Scs.entities.recipe.Recipe;
@@ -24,6 +25,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@SuppressWarnings("serial")
 @Entity
 @Table
 @Data
@@ -45,6 +47,7 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Recipe> recipes = new ArrayList<>();
 
@@ -56,7 +59,6 @@ public class User implements UserDetails {
 		this.email = _email;
 		this.password = _password;
 		this.role = Role.USER;
-
 	}
 
 	@Override

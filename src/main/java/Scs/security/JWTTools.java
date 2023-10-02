@@ -17,9 +17,13 @@ public class JWTTools {
 	private String secret;
 
 	public String createToken(User u) {
-		String token = Jwts.builder().setSubject(u.getId().toString()).setIssuedAt(new Date(System.currentTimeMillis()))
+		String token = Jwts.builder()
+				.setSubject(u.getId().toString())
+				.claim("role", u.getRole())
+				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
-				.signWith(Keys.hmacShaKeyFor(secret.getBytes())).compact();
+				.signWith(Keys.hmacShaKeyFor(secret.getBytes()))
+				.compact();
 		return token;
 	}
 
@@ -28,7 +32,7 @@ public class JWTTools {
 			Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(secret.getBytes())).build().parse(token);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			throw new UnauthorizedException("Token is invalid! Please login again");
+			throw new UnauthorizedException("Token is invalid! Please login up again");
 		}
 	}
 

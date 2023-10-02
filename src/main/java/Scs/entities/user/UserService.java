@@ -1,6 +1,7 @@
 package Scs.entities.user;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import Scs.Exceptions.BadRequestException;
@@ -63,4 +66,21 @@ public class UserService {
 		return userRepo.findByEmail(email)
 				.orElseThrow(() -> new NotFoundException("We can not find any user with the email: " + email));
 	}
+	
+	public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof User) {
+            User user = (User) principal;
+            String currentUserName = user.getName();
+            Optional<User> userOptional = userRepo.findByName(currentUserName);
+
+            if (userOptional.isPresent()) {
+                return userOptional.get();
+            }
+        }
+
+        throw new NotFoundException("Utente non trovato");
+    }
 }
