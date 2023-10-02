@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import Scs.Exceptions.NotFoundException;
 import Scs.entities.ingredients.Ingredient;
@@ -60,10 +61,20 @@ public class RecipeService {
 	}
 
 	public Page<Recipe> findAll(int page, String sort) {
-		Pageable pageable = PageRequest.of(page, 10, Sort.by(sort));
+		Pageable pageable = PageRequest.of(page, 12, Sort.by(sort));
 		return recipeRepo.findAll(pageable);
 	}
 
+	public Page<Recipe> getRecipesByCategory(RecipeCategory category, int page, String order) {
+	    Pageable pageable = PageRequest.of(page, 10, Sort.by(order));
+
+	    if (category != null) {
+	        return recipeRepo.findByCategory(category, pageable);
+	    } else {
+	        return recipeRepo.findAll(pageable);
+	    }
+	}
+	
 	public Recipe findById(Long id) throws NotFoundException {
 		return recipeRepo.findById(id).orElseThrow(() -> new NotFoundException(id));
 	}
