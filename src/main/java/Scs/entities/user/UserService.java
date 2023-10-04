@@ -53,6 +53,7 @@ public class UserService {
 		User found = this.findById(id);
 		found.setName(body.getName());
 		found.setSurname(body.getSurname());
+		found.setUsername(body.getUsername());
 		found.setEmail(body.getEmail());
 		return userRepo.save(found);
 	}
